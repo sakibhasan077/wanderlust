@@ -8,15 +8,15 @@ import { usePathname } from "next/navigation";
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  let navLink =<>
+  const navLink =<>
   {/* Home */}
-    <Link href={"/"} className={`${pathname === "/" ? "border-b-2 border-brand pb-0.5 text-sm font-medium text-brand":"text-sm font-medium text-zinc-700 transition-colors hover:text-brand"}`}>Home</Link>
+    <Link href={"/"} onClick={() => setOpen(false)} className={`${pathname === "/" ? "border-b-2 border-brand pb-0.5 text-sm font-medium text-brand":"text-sm font-medium text-zinc-700 transition-colors hover:text-brand"}`}>Home</Link>
     {/* Destinations */}
-    <Link href = "/destinations" className={`${pathname === "/destinations" ? "border-b-2 border-brand pb-0.5 text-sm font-medium text-brand":"text-sm font-medium text-zinc-700 transition-colors hover:text-brand"}`}>Destinations</Link>
+    <Link href = "/destinations" onClick={() => setOpen(false)} className={`${pathname === "/destinations" ? "border-b-2 border-brand pb-0.5 text-sm font-medium text-brand":"text-sm font-medium text-zinc-700 transition-colors hover:text-brand"}`}>Destinations</Link>
     {/* My Bookings */}
-    <Link href = "/bookings" className={`${pathname === "/bookings" ? "border-b-2 border-brand pb-0.5 text-sm font-medium text-brand":"text-sm font-medium text-zinc-700 transition-colors hover:text-brand"}`}>My Bookings</Link>
+    <Link href = "/bookings" onClick={() => setOpen(false)} className={`${pathname === "/bookings" ? "border-b-2 border-brand pb-0.5 text-sm font-medium text-brand":"text-sm font-medium text-zinc-700 transition-colors hover:text-brand"}`}>My Bookings</Link>
     {/* Admin */}
-    <Link href = "/admin" className={`${pathname === "/admin" ? "border-b-2 border-brand pb-0.5 text-sm font-medium text-brand":"text-sm font-medium text-zinc-700 transition-colors hover:text-brand"}`}>Admin</Link>
+    <Link href = "/admin" onClick={() => setOpen(false)} className={`${pathname === "/admin" ? "border-b-2 border-brand pb-0.5 text-sm font-medium text-brand":"text-sm font-medium text-zinc-700 transition-colors hover:text-brand"}`}>Admin</Link>
   </>
 
 
