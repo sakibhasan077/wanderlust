@@ -1,5 +1,7 @@
+import { CTA } from "@/components/home/cta";
 import { Hero } from "@/components/home/hero";
 import { SearchBar } from "@/components/home/search-bar";
+import { Testimonials } from "@/components/home/testimonials";
 import { WhyChoose } from "@/components/home/why-choose";
 
 export default function Home() {
@@ -11,6 +13,8 @@ export default function Home() {
         <SearchBar />
       </div>
       <WhyChoose />
+      <Testimonials />
+      <CTA />
     </main>
   );
 }
