@@ -9,10 +9,11 @@ import {
   MapPin,
   Star,
   Users,
-  Edit2,
   Trash2,
 } from "lucide-react";
 import { Destination } from "@/types/destination";
+import EditDialog from "@/components/destination/EditButtonDialog";
+import { getStableRatingAndReviews } from "@/lib/utils";
 
 // TODO: replace with real data from the backend once the API provides it.
 const highlights = [
@@ -32,6 +33,31 @@ const inclusions = [
   "All meals included",
   "Airport transfers",
   "Professional tour guide",
+];
+
+// Sample traveler reviews
+const sampleReviews = [
+  {
+    name: "Sophia Martinez",
+    date: "October 2026",
+    rating: 5,
+    comment:
+      "Hands down one of the best trips we've ever taken! Everything from the itinerary to the local guide was seamless and unforgettable.",
+  },
+  {
+    name: "Marcus Vance",
+    date: "September 2026",
+    rating: 5,
+    comment:
+      "Spectacular experience. The views were breathtaking and Wanderlust took care of every small detail. Will definitely book again!",
+  },
+  {
+    name: "Amina Al-Mansoor",
+    date: "August 2026",
+    rating: 4,
+    comment:
+      "A wonderfully curated journey. Great pacing, fantastic local cuisine, and comfortable accommodations throughout.",
+  },
 ];
 
 // Reusable small section heading.
@@ -66,6 +92,12 @@ const DestinationDetails = async ({
   );
   const data: Destination = await res.json();
 
+  // Stable random rating & review count derived from destination id
+  const { rating: stableRating, reviews: stableReviews } =
+    getStableRatingAndReviews(data._id);
+  const rating = data.rating ?? stableRating;
+  const reviewsCount = data.reviews ?? stableReviews;
+
   return (
     <div className="mx-auto max-w-6xl px-6 pt-24 pb-16">
       {/* Top bar: back link + share / save / cancel actions */}
@@ -79,13 +111,9 @@ const DestinationDetails = async ({
         </Link>
 
         <div className="flex items-center gap-2">
-          <button
-            type="button"
-            className="inline-flex items-center gap-1.5 border border-zinc-200 bg-white px-3 py-2 text-xs font-medium text-zinc-700 transition-colors hover:bg-zinc-50"
-          >
-            <Edit2 className="size-3.5" aria-hidden />
-            Edit
-          </button>
+          <span>
+            <EditDialog destinationData={data} />
+          </span>
           <button
             type="button"
             className="inline-flex items-center gap-1.5 border border-red-200 bg-white px-3 py-2 text-xs font-medium text-red-500 transition-colors hover:bg-red-50"
@@ -124,9 +152,9 @@ const DestinationDetails = async ({
                   className="size-4 fill-amber-400 text-amber-400"
                   aria-hidden
                 />
-                {data.rating}{" "}
+                <span className="font-semibold text-zinc-900">{rating}</span>{" "}
                 <span className="text-zinc-400">
-                  ({data.reviews} reviews)
+                  ({reviewsCount} reviews)
                 </span>
               </span>
               <span className="inline-flex items-center gap-1.5">
@@ -173,6 +201,50 @@ const DestinationDetails = async ({
                   />
                 ))}
               </ul>
+            </div>
+
+            {/* Traveler Reviews */}
+            <div className="mt-8 border-t border-zinc-100 pt-6">
+              <div className="flex items-center justify-between">
+                <SectionHeading>Traveler Reviews</SectionHeading>
+                <span className="text-xs font-medium text-brand">
+                  {reviewsCount} verified reviews
+                </span>
+              </div>
+
+              <div className="mt-4 space-y-3">
+                {sampleReviews.map((rev) => (
+                  <div
+                    key={rev.name}
+                    className="rounded-lg border border-zinc-100 bg-zinc-50/60 p-4"
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <div>
+                        <p className="text-sm font-semibold text-zinc-900">
+                          {rev.name}
+                        </p>
+                        <p className="text-xs text-zinc-400">{rev.date}</p>
+                      </div>
+                      <div className="flex items-center gap-0.5">
+                        {Array.from({ length: 5 }).map((_, i) => (
+                          <Star
+                            key={i}
+                            className={`size-3.5 ${
+                              i < rev.rating
+                                ? "fill-amber-400 text-amber-400"
+                                : "fill-zinc-200 text-zinc-200"
+                            }`}
+                            aria-hidden
+                          />
+                        ))}
+                      </div>
+                    </div>
+                    <p className="mt-2 text-xs leading-relaxed text-zinc-600 sm:text-sm">
+                      &ldquo;{rev.comment}&rdquo;
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
