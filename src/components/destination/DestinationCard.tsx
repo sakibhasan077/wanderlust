@@ -1,9 +1,8 @@
 "use client";
 
-import { useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { CalendarDays, MapPin, ShoppingCart, Star } from "lucide-react";
+import { CalendarDays, MapPin } from "lucide-react";
 import type { Destination } from "@/types/destination";
 
 interface DestinationCardProps {
@@ -53,7 +52,7 @@ export function DestinationCard({ destination }: DestinationCardProps) {
         {/* Book Now + Add to Cart */}
         <div className="mt-4 flex items-center justify-between gap-3">
           <Link
-            href={`/destination-details/${_id}`}
+            href={`/destinations/${_id}`}
             className="inline-flex items-center gap-1 text-xs font-bold tracking-wide text-brand uppercase transition-colors hover:text-brand/80"
           >
             Book Now

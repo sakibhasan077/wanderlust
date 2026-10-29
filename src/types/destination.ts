@@ -9,4 +9,8 @@ export interface Destination {
   departureDate: string;
   image: string;
   description: string;
+  // Optional detail-page fields (shown on the destination details page).
+  rating?: number;
+  reviews?: number;
+  overview?: string;
 }
