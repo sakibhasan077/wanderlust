@@ -7,10 +7,16 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        // Destination images served by the backend API.
+        protocol: "http",
+        hostname: "localhost",
+        port: "8000",
+      },
     ],
   },
-  cacheComponents: true,
-  partialPrefetching: true,
+  // cacheComponents: true,
+  // partialPrefetching: true,
   reactCompiler: true,
   turbopack: {
     rules: {

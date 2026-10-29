@@ -1,16 +1,18 @@
 "use client";
 import { Save, X } from "lucide-react";
-import { useRouter } from "next/navigation";
 
 // Options for the Category dropdown.
 const categories = ["Beach", "Mountain", "City", "Adventure", "Cultural"];
 
 const AddDestinationForm = () => {
-  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
+    // Grab a reference to the form BEFORE awaiting — e.currentTarget
+    // becomes null once the async part starts.
+    const form = e.currentTarget;
+
+    const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
     console.log(data);
     const res = await fetch("http://localhost:8000/destinations",{
@@ -22,7 +24,9 @@ const AddDestinationForm = () => {
     });
     const resData = await res.json();
     console.log("from server",resData);
-    router.refresh()
+
+    // Empty all input fields after a successful submit.
+    form.reset();
   };
 
   // Shared class string so every input looks the same.
