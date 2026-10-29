@@ -14,6 +14,7 @@ import {
 import { Destination } from "@/types/destination";
 import EditDialog from "@/components/destination/EditButtonDialog";
 import { getStableRatingAndReviews } from "@/lib/utils";
+import { DeleteDialog } from "@/components/destination/DeleteDestination";
 
 // TODO: replace with real data from the backend once the API provides it.
 const highlights = [
@@ -114,13 +115,9 @@ const DestinationDetails = async ({
           <span>
             <EditDialog destinationData={data} />
           </span>
-          <button
-            type="button"
-            className="inline-flex items-center gap-1.5 border border-red-200 bg-white px-3 py-2 text-xs font-medium text-red-500 transition-colors hover:bg-red-50"
-          >
-            <Trash2 className="size-3.5" aria-hidden />
-            Delete
-          </button>
+          <span>
+            <DeleteDialog destinationData={data}></DeleteDialog>
+          </span>
         </div>
       </div>
 
