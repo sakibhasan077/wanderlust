@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"; // for button
 import { Field, FieldError, FieldLabel } from "@/components/ui/field"; // for error field
 import { Input } from "@/components/ui/input"; // for input field
 import { signUp } from "@/lib/auth-client";
+import { redirect } from "next/navigation";
 
 type FieldName = "name" | "email" | "password" | "confirmPassword"; // understood
 type FieldErrors = Partial<Record<FieldName, string>>; // Partial -> optional, Record -> define key: value type
@@ -126,7 +127,6 @@ const SignUpForm = () => {
     const nextErrors = validate(userData);
     setErrors(nextErrors)
     if (Object.keys(nextErrors).length > 0) return;
-    console.log(userData);
     try{
       await signUp.email(
       {
@@ -139,12 +139,7 @@ const SignUpForm = () => {
       console.log(err);
     }
     formTarget.reset();
-    // const {data,error} = await signUp.email(
-    //   {
-    //     ...userData
-    //   }
-    // )
-    // console.log(data);
+    redirect("/")
   }; // pending
 
   return (
