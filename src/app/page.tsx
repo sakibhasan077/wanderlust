@@ -1,4 +1,5 @@
 import { CTA } from "@/components/home/cta";
+import FeaturedDestination from "@/components/home/FeaturedDestination";
 import { Hero } from "@/components/home/hero";
 import { SearchBar } from "@/components/home/search-bar";
 import { Testimonials } from "@/components/home/testimonials";
@@ -12,6 +13,7 @@ export default function Home() {
         <Hero />
         <SearchBar />
       </div>
+      <FeaturedDestination></FeaturedDestination>
       <WhyChoose />
       <Testimonials />
       <CTA />
