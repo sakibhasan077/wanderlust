@@ -19,7 +19,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 export function Navbar() {
   const { data: season, isPending } = useSession();
   const user = season?.user;
-  console.log(user);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
@@ -55,7 +54,7 @@ export function Navbar() {
       <Link
         href="/add-destination"
         onClick={() => setOpen(false)}
-        className={`${pathname === "/destinations" ? "border-b-2 border-brand pb-0.5 text-sm font-medium text-brand" : "text-sm font-medium text-zinc-700 transition-colors hover:text-brand"}`}
+        className={`${pathname === "/add-destination" ? "border-b-2 border-brand pb-0.5 text-sm font-medium text-brand" : "text-sm font-medium text-zinc-700 transition-colors hover:text-brand"}`}
       >
         Add Destinations
       </Link>
@@ -89,6 +88,7 @@ export function Navbar() {
 
           {/* Mobile: menu toggle */}
           <button
+            // nativeButton = {false}
             type="button"
             className="inline-flex items-center justify-center text-zinc-700 transition-colors hover:text-brand md:hidden"
             onClick={() => setOpen((wasOpen) => !wasOpen)}
@@ -123,6 +123,7 @@ export function Navbar() {
               <>
                 <Popover>
                   <PopoverTrigger
+                    nativeButton = {false}
                     render={
                       <Avatar>
                         <AvatarImage
@@ -173,6 +174,7 @@ export function Navbar() {
               <>
                 <Popover>
                   <PopoverTrigger
+                    nativeButton = {false}
                     render={
                       <Avatar>
                         <AvatarImage

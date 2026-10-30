@@ -3,18 +3,16 @@ import Link from "next/link";
 import {
   ArrowLeft,
   BadgeCheck,
-  Calendar,
   Check,
   Clock,
   MapPin,
   Star,
-  Users,
-  Trash2,
 } from "lucide-react";
 import { Destination } from "@/types/destination";
 import EditDialog from "@/components/destination/EditButtonDialog";
 import { getStableRatingAndReviews } from "@/lib/utils";
 import { DeleteDialog } from "@/components/destination/DeleteDestination";
+import Sidebar from "@/components/booking-component/Sidebar";
 
 // TODO: replace with real data from the backend once the API provides it.
 const highlights = [
@@ -122,7 +120,7 @@ const DestinationDetails = async ({
       </div>
 
       {/* Hero image */}
-      <div className="relative mt-4 aspect-[16/7] overflow-hidden rounded-xl">
+      <div className="relative mt-4 aspect-16/7 overflow-hidden rounded-xl">
         <Image
           src={data.image}
           alt={data.name}
@@ -247,52 +245,7 @@ const DestinationDetails = async ({
         </div>
 
         {/* Right: booking card */}
-        <div>
-          <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
-            {/* Price */}
-            <p className="text-sm text-zinc-500">
-              Starting from
-              <span className="ml-2 text-3xl font-bold text-brand">
-                ${data.price}
-              </span>
-            </p>
-            <p className="mt-1 text-xs text-zinc-400">per person</p>
-
-            {/* Trip facts */}
-            <div className="mt-4 space-y-2 border-t border-zinc-100 pt-4 text-sm text-zinc-600">
-              <p className="flex items-center gap-2">
-                <Calendar className="size-4 text-brand" aria-hidden />
-                {data.departureDate}
-              </p>
-              <p className="flex items-center gap-2">
-                <Clock className="size-4 text-brand" aria-hidden />
-                {data.duration}
-              </p>
-              <p className="flex items-center gap-2">
-                <Users className="size-4 text-brand" aria-hidden />
-                Max 15 travelers
-              </p>
-            </div>
-
-            {/* Book now */}
-            <button
-              type="button"
-              className="mt-5 w-full bg-brand px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand/90"
-            >
-              Book Now
-            </button>
-
-            {/* Perks */}
-            <ul className="mt-5 space-y-2 border-t border-zinc-100 pt-4 text-sm text-zinc-600">
-              {inclusions.map((item) => (
-                <li key={item} className="flex items-center gap-2">
-                  <Check className="size-4 text-brand" aria-hidden />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        <Sidebar data = {data}></Sidebar>
       </div>
     </div>
   );
