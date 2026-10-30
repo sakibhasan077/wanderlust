@@ -66,7 +66,7 @@ export function Navbar() {
             <Link href="/login" className={`${pathname === "/login" ? "border-b-2 border-brand pb-0.5 text-sm font-medium text-brand":"text-sm font-medium text-zinc-700 transition-colors hover:text-brand"}`}>
               Login
             </Link>
-            <Link href="/signup" className={`${pathname === "/signup" ? "border-b-2 border-brand pb-0.5 text-sm font-medium text-brand":"text-sm font-medium text-zinc-700 transition-colors hover:text-brand"}`}>
+            <Link href="/sign-up" className={`${pathname === "/signup" ? "border-b-2 border-brand pb-0.5 text-sm font-medium text-brand":"text-sm font-medium text-zinc-700 transition-colors hover:text-brand"}`}>
               Sign Up
             </Link>
           </div>
